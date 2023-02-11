@@ -4,6 +4,7 @@
  */
 package JFrame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -19,6 +20,12 @@ import javax.swing.WindowConstants;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 import java.sql.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+//import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -32,6 +39,7 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
         initComponents();
         setDataToCards();
+        showPieChart();
     }
 
     /**
@@ -64,6 +72,34 @@ public class HomePage extends javax.swing.JFrame {
             e.printStackTrace();;
         }
         
+    }
+    
+    //pie chart for regions data
+    public void showPieChart(){
+//       
+        DefaultPieDataset barDataset = new DefaultPieDataset();
+        try{
+            Connection con = DBConnection.getConnection();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+//        barDataset.setValue("North Region", new Double(20));
+//        barDataset.setValue("Central Region", new Double(20));
+//        barDataset.setValue("Southern Region", new Double(20));
+        
+        JFreeChart pieChart = ChartFactory.createPieChart("Cholera Effects by regions", barDataset,false,true,false);
+        PiePlot piePlot = (PiePlot) pieChart.getPlot();
+        
+        piePlot.setSectionPaint("North Region",new Color(255,255,102));
+        piePlot.setSectionPaint("Central Region", new Color(102,255,102));
+        piePlot.setSectionPaint("Southern Region", new Color(255,102,153));
+        
+        piePlot.setBackgroundPaint(Color.white);
+        ChartPanel barChartPanel = new ChartPanel(pieChart);
+        PieChartPanel.removeAll();
+        PieChartPanel.add(barChartPanel,BorderLayout.CENTER);
+        PieChartPanel.validate();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -108,6 +144,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel20 = new JLabel();
         jPanel18 = new JPanel();
         Total_Hospitalised = new JLabel();
+        PieChartPanel = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -202,7 +239,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -228,9 +265,9 @@ public class HomePage extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(SignoutButton, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SignoutButton, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel7Layout.setVerticalGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -251,7 +288,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jLabel8, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -274,7 +311,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(jPanel9Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel9, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -302,7 +339,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(ManageCholeraButton, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -333,7 +370,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(jPanel11Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(ViewRecords, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -416,7 +453,7 @@ public class HomePage extends javax.swing.JFrame {
         Total_Dealth.setText(" 300");
         jPanel13.add(Total_Dealth, new AbsoluteConstraints(60, 60, 120, 40));
 
-        jPanel12.add(jPanel13, new AbsoluteConstraints(720, 60, 260, 140));
+        jPanel12.add(jPanel13, new AbsoluteConstraints(700, 60, 260, 140));
 
         jLabel12.setBackground(new Color(51, 51, 255));
         jLabel12.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
@@ -491,6 +528,9 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel12.add(jPanel18, new AbsoluteConstraints(370, 60, 260, 140));
 
+        PieChartPanel.setLayout(new BorderLayout());
+        jPanel12.add(PieChartPanel, new AbsoluteConstraints(510, 250, 460, 380));
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -498,9 +538,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 1805, GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel12, GroupLayout.PREFERRED_SIZE, 1044, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel12, GroupLayout.PREFERRED_SIZE, 1102, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -580,6 +620,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel ManageCholeraButton;
+    private JPanel PieChartPanel;
     private JLabel SignoutButton;
     private JLabel TotalCase;
     private JLabel Total_Dealth;
